@@ -1,19 +1,13 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {}
+  constructor(private readonly coffeesService: CoffeesService) {
+  }
 
   // GET -> /coffees
   @Get()
@@ -30,14 +24,14 @@ export class CoffeesController {
 
   // POST -> /coffees
   @Post()
-  create(@Body('name') body): void {
-    return this.coffeesService.create(body);
+  create(@Body() createCoffeeDto: CreateCoffeeDto): void {
+    return this.coffeesService.create(createCoffeeDto);
   }
 
   // PATCH -> /coffees/:id
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body): void {
-    return this.coffeesService.update(id, body);
+  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto): void {
+    return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   // DELETE -> /coffees/:id
