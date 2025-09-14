@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
 
 @Injectable()
 export class CoffeesService {
@@ -70,31 +72,35 @@ export class CoffeesService {
     return this.coffees;
   }
 
-  findOne(id: string): Coffee {
-    const coffee = this.coffees.find((item) => item.id === +id);
+  findOne(id: number): Coffee {
+    const coffee = this.coffees.find((item) => item.id === id);
     if (!coffee) throw new NotFoundException(`Coffee #${id} not found!`);
     return coffee;
   }
 
-  create(createCoffeeDto: any) {
-    this.coffees.push(createCoffeeDto);
-    return createCoffeeDto;
+  create(createCoffeeDto: CreateCoffeeDto): void {
+    this.coffees.push({
+      id: this.coffees[this.coffees.length - 1].id + 1,
+      name: createCoffeeDto.name,
+      brand: createCoffeeDto.brand,
+      flavors: createCoffeeDto.flavors,
+    });
   }
 
-  update(id: string, createCoffeeDto: any): void {
-    const { name, brand, flavors } = createCoffeeDto;
-    const index = this.coffees.findIndex((item) => item.id === +id);
-    if (index >= 0)
-      this.coffees[index] = {
-        id: +id,
-        name: name,
-        brand: brand,
-        flavors: flavors,
-      };
+  update(id: number, updateCoffeeDto: UpdateCoffeeDto): void {
+    const index = this.coffees.findIndex((item) => item.id === id);
+    if (index < 0) throw new NotFoundException(`Coffee #${id} not found!`);
+    this.coffees[index] = {
+      id: id,
+      name: updateCoffeeDto.name ?? '',
+      brand: updateCoffeeDto.brand ?? '',
+      flavors: updateCoffeeDto.flavors ?? [],
+    };
   }
 
-  remove(id: string): void {
-    const index = this.coffees.findIndex((item) => item.id === +id);
-    if (index >= 0) this.coffees.splice(index, 1);
+  remove(id: number): void {
+    const index = this.coffees.findIndex((item) => item.id === id);
+    if (index < 0) throw new NotFoundException(`Coffee #${id} not found!`);
+    this.coffees.splice(index, 1);
   }
 }
