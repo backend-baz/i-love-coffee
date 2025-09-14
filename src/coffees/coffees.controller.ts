@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -6,13 +14,11 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {
-  }
+  constructor(private readonly coffeesService: CoffeesService) {}
 
   // GET -> /coffees
   @Get()
-  findAll(@Query() paginationQuery): Coffee[] {
-    // const { limit, offset } = paginationQuery;
+  findAll(): Coffee[] {
     return this.coffeesService.findAll();
   }
 
@@ -30,7 +36,10 @@ export class CoffeesController {
 
   // PATCH -> /coffees/:id
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto): void {
+  update(
+    @Param('id') id: string,
+    @Body() updateCoffeeDto: UpdateCoffeeDto,
+  ): void {
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 

@@ -76,8 +76,9 @@ export class CoffeesService {
     return coffee;
   }
 
-  create(createCoffeeDto: any): void {
+  create(createCoffeeDto: any) {
     this.coffees.push(createCoffeeDto);
+    return createCoffeeDto;
   }
 
   update(id: string, createCoffeeDto: any): void {
