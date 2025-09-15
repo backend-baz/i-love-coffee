@@ -2,11 +2,16 @@
 
 This app provides information about coffee. It was created by [Nest](https://nestjs.com) framework.
 
-# Project setup
+# Project Setup
 
-```bash
-npm install
-```
+1. Install all dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the PostgreSQL development database in a local container:
+   ```bash
+   docker-compose up -d
+   ```
 
 # Compile and run the project
 

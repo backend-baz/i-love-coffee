@@ -18,19 +18,19 @@ export class CoffeesController {
 
   // GET -> /coffees
   @Get()
-  findAll(): Coffee[] {
+  findAll(): Promise<Coffee[]> {
     return this.coffeesService.findAll();
   }
 
   // GET -> /coffees/:id
   @Get(':id')
-  findOne(@Param('id') id: number): Coffee {
+  findOne(@Param('id') id: number): Promise<Coffee> {
     return this.coffeesService.findOne(id);
   }
 
   // POST -> /coffees
   @Post()
-  create(@Body() createCoffeeDto: CreateCoffeeDto): void {
+  create(@Body() createCoffeeDto: CreateCoffeeDto): Promise<Coffee> {
     return this.coffeesService.create(createCoffeeDto);
   }
 
@@ -39,13 +39,13 @@ export class CoffeesController {
   update(
     @Param('id') id: number,
     @Body() updateCoffeeDto: UpdateCoffeeDto,
-  ): void {
+  ): Promise<Coffee> {
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   // DELETE -> /coffees/:id
   @Delete(':id')
-  remove(@Param('id') id: number): void {
+  remove(@Param('id') id: number): Promise<Coffee> {
     return this.coffeesService.remove(id);
   }
 }
