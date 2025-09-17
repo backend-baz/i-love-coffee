@@ -2,6 +2,11 @@
 
 This app provides information about coffee. It was created by [**Nest**](https://nestjs.com) framework.
 
+# Prerequisites
+
+- **[Node.js 22](https://nodejs.org/en)**
+- **[Docker](https://www.docker.com)**
+
 # Project Setup
 
 1. Install all dependencies:
@@ -25,7 +30,7 @@ npm run start:dev
 # production mode:
 npm run start:prod
 ```
-This API runs at http://localhost:3000
+The API will be available at http://localhost:3000
 
 # Run tests
 
