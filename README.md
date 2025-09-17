@@ -1,6 +1,6 @@
-**I love coffee - NestJs REST API**
+**I Love Coffee, NestJs REST API**
 
-This app provides information about coffee. It was created by [Nest](https://nestjs.com) framework.
+This app provides information about coffee. It was created by [**Nest**](https://nestjs.com) framework.
 
 # Project Setup
 
@@ -25,6 +25,7 @@ npm run start:dev
 # production mode:
 npm run start:prod
 ```
+This API runs at http://localhost:3000
 
 # Run tests
 
